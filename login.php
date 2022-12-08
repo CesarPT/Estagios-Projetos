@@ -1,6 +1,6 @@
 <?php include_once("connectbd.php") ?>
 <!--
-
+https://www.youtube.com/watch?v=scd8YKiuS7I&t=199s logout
 -->
 
 <!DOCTYPE html>
@@ -68,7 +68,6 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
         echo "ENTREI";
         $row = mysqli_fetch_assoc($result);
         if ($row['nome'] == $name && $row['password'] == $password) {
-            echo "Logged IN!";
             $_SESSION['nome'] = $row['name'];
             $_SESSION['id'] = $row['id'];
             $_SESSION['password'] = $row['password'];
