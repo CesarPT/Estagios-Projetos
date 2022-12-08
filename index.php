@@ -1,3 +1,8 @@
+<!--Conexão BD-->
+<?php include_once("connectbd.php");
+session_start();
+?>
+
 <!doctype html>
 <html lang="pt">
 
@@ -27,16 +32,16 @@
       <a class="nav-link text-white" href="index.php">Home</a>
     </li>
     <li class="nav-item p-2">
-      <a class="nav-link disabled text-secondary" href="#">Responsável</a>
+      <a class="nav-link disabled text-secondary" href="responsavel.php">Responsável</a>
     </li>
     <li class="nav-item p-2">
-      <a class="nav-link disabled text-secondary" href="#">Docente</a>
+      <a class="nav-link disabled text-secondary" href="docente.php">Docente</a>
     </li>
     <li class="nav-item p-2">
-      <a class="nav-link disabled text-secondary" href="#">Empresa</a>
+      <a class="nav-link disabled text-secondary" href="empresa.php">Empresa</a>
     </li>
     <li class="nav-item p-2">
-      <a class="nav-link disabled text-secondary" href="#">Aluno</a>
+      <a class="nav-link disabled text-secondary" href="aluno.php">Aluno</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="registrar.php">
@@ -48,8 +53,23 @@
         <button class="btn btn-primary">Login</button>
       </a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="areapessoal.php">
+        <button class="btn btn-light">Área pessoal</button>
+      </a>
+    </li>
+    <li class="nav-item">
+        <p class="p-3 mb-2 bg-dark text-white" class="text-light">
+          Utilizador: <?php
+          $_SESSION['user_name'];
+          ?>
+        </p>
+    </li>
   </ul>
-  </nav>
+
+</nav>
+
+
   <!-- Texto e outros -->
   <h4 class="text-center">Bem vindo!</h4>
   <h5 class="text-center">Para começar, clique no botão <b>Registrar</b>.</</h5>
