@@ -1,4 +1,6 @@
-<?php include_once("connectbd.php") ?>
+<?php
+include_once("ConnectionBD/connectbd.php");
+?>
 
 
 <!DOCTYPE html>
