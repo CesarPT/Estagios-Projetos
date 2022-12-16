@@ -68,7 +68,7 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
         echo "ENTREI";
         $row = mysqli_fetch_assoc($result);
         if ($row['nome'] == $name && $row['password'] == $password) {
-            $_SESSION['nome'] = $row['name'];
+            $_SESSION['name'] = $row['nome'];
             $_SESSION['id'] = $row['id'];
             $_SESSION['password'] = $row['password'];
             echo "sd,jkgfsdk.jfasdçkj";
