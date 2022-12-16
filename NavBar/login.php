@@ -1,6 +1,59 @@
 <!--Conexão BD-->
 <?php include_once("../ConnectionBD/connectbd.php");
 session_start(); 
+
+function validate($data){
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+if (isset($_POST['name']) && isset($_POST['password'])) {
+
+  $name = validate($_POST['name']);
+  $password = validate($_POST['password']);
+
+
+  //secho "----".$password;
+
+
+
+
+  if (empty($name)) {
+      header("Location: login.php?error=User Name is requierd");
+      //exit();
+  } elseif (empty($password)) {
+      header("Location login.php?error=Password is requierd");
+      //exit();
+  }
+
+  $sql = "Select * FROM Utilizador Where nome='$name' and password='$password'";
+
+  $result = mysqli_query($link, $sql);
+
+  if (mysqli_num_rows($result) == 1) {
+      //echo "ENTREI";
+      $_SESSION['username']=$name;
+      //header("Location:index.php");
+      $row = mysqli_fetch_assoc($result);
+      if ($row['nome'] == $name && $row['password'] == $password) {
+          $_SESSION['nome'] = $row['nome'];
+          $_SESSION['id'] = $row['id'];
+          $_SESSION['password'] = $row['password'];
+          //echo "sd,jkgfsdk.jfasdçkj";
+          header("Location: index.php");
+          exit();
+      } else {
+          header("Location: login.php?error=incorrer username or password");
+          exit();
+      }
+  } else {
+      header("Location: login.php");
+  }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -127,7 +180,7 @@ session_start();
             <i class="fas fa-gem me-3"></i>Membros do grupo:
           </h6>
           <p>César Guimarães - 1210522</p>
-          <p>Daniel Lima - 12105<p>
+          <!--<p>Daniel Lima - 12105<p>-->
           <p>Rodrigo Morais - 1210536<p>
         </div>
 
@@ -192,56 +245,7 @@ session_start();
 
 
 <?php
-function validate($data){
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
 
-if (isset($_POST['name']) && isset($_POST['password'])) {
-
-    $name = validate($_POST['name']);
-    $password = validate($_POST['password']);
-
-
-    echo "----".$password;
-
-
-
-
-    if (empty($name)) {
-        header("Location: login.php?error=User Name is requierd");
-        //exit();
-    } elseif (empty($password)) {
-        header("Location login.php?error=Password is requierd");
-        //exit();
-    }
-
-    $sql = "Select * FROM Utilizador Where nome='$name' and password='$password'";
-
-    $result = mysqli_query($link, $sql);
-
-    if (mysqli_num_rows($result) == 1) {
-        echo "ENTREI";
-        $_SESSION['username']=$name;
-        header("Location:index.php");
-        $row = mysqli_fetch_assoc($result);
-        if ($row['nome'] == $name && $row['password'] == $password) {
-            $_SESSION['nome'] = $row['name'];
-            $_SESSION['id'] = $row['id'];
-            $_SESSION['password'] = $row['password'];
-            echo "sd,jkgfsdk.jfasdçkj";
-            header("Location; index.php");
-            exit();
-        } else {
-            header("Location: login.php?error=incorrer username or password");
-            exit();
-        }
-    } else {
-        header("Location: login.php");
-    }
-}
 
 
 ?>
