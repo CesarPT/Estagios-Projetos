@@ -1,7 +1,7 @@
 <?php
     session_start();
     //Limpar o username
-    unset($_SESSION['username']);
+    session_destroy();
     //Atualizar o index
     header('Location: index.php'); 
 ?>
