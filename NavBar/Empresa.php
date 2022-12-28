@@ -37,7 +37,80 @@ $erro1 = 'Faça login';
 
   <!-- Texto e outros -->
   <h4 class="text-center">Bem vindo - Empresa</h4>
- 
+
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>
+                    Número
+                  </th>
+                  <th>
+                    Descrição
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    1
+                  </td>
+                  <td>
+                  <button type="button" onclick="alterarDados()">Alterar dados</button>
+                  </td>
+                </tr>
+                <tr class="table-active">
+                  <td>
+                    2
+                  </td>
+                  <td>
+                    Formalizar pedidos de estágio
+                  </td>
+                </tr>
+                <tr class="table-success">
+                  <td>
+                    3
+                  </td>
+                  <td>
+                    Consultar email e nome dos alunos candidatos
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="info" class="col-md-12">
+            <br><br>
+            <h5>
+              Informações:
+            </h5>
+            <p>
+              Clique no item em cima que deseja visualizar. <br><strong>Irá aparecer em baixo todas as informações</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+  </div>
+
+<!-- AJAX + PHP -->
+<script>
+
+  function alterarDados() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("info").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", "../PHP/AlterarDados.php", true);
+    xhttp.send();
+  }
+
+</script>
+
 <!-- Footer -->
 <?php footer(); ?>
 
