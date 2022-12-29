@@ -1,18 +1,24 @@
-<!--Conexão BD-->
-<?php include_once("../ConnectionBD/connectbd.php");
-session_start();
-require 'NavBar.php';
-require 'Footer.php';
-
-//Atributos de erro no TryCatch
-$erro1 = 'Faça login';
+<?php
+ include_once("../ConnectionBD/connectbd.php");
+ require 'NavBar.php';
+ require 'Footer.php';
 ?>
 
-<!doctype html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<head>
+<title>Aluno</title>
+</head>
+
 <html lang="pt">
 
 <head>
-  <title>Gestão de Projetos/Estágios</title>
+  <title>Pedir proposta</title>
   <link rel="icon" href="../Imagens/logo.jpg">
 
   <meta charset="utf-8">
@@ -31,16 +37,31 @@ $erro1 = 'Faça login';
 </head>
 
 <body>
-  
+
+
 <!-- NavBar para verificar qual o tipo_user e receber as permissões -->
 <?php navbar(); ?>
 
-  <!-- Texto e outros -->
-  <h4 class="text-center">Bem vindo - Responsável</h4>
- 
+  <!-- Texto e outros //////////////////////////////////////////////////////////////////////////////////////////////-->
+  <p> propostas</p>
+
+  <form action="/PedirProposta.php" method="POST">
+  <textarea name="descricao"></textarea><br>
+  <label for="v c">Empresa</label><br>
+  <label for="local">Local</label><br>
+  <input type="submit" value="Submit">
+  </form> 
+
+<?php
+echo $_POST['descricao'];
+?>
+
+<table>
+    
+</table>
+
 <!-- Footer -->
 <?php footer(); ?>
 
 </body>
-
 </html>
