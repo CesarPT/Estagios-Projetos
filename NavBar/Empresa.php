@@ -105,11 +105,77 @@ $erro1 = 'Faça login';
         this.responseText;
       }
     };
-    xhttp.open("GET", "../PHP/AlterarDados.php", true);
+    xhttp.open("GET", "../PHP/Empresa/AlterarDados.php", true);
     xhttp.send();
   }
 
 </script>
+
+<!-- Estes POST vem do AlterarDados.php -->
+<?php
+if(isset($_POST['submitEmail'])){
+  $email = $_POST['email'];
+
+  $nome=$_SESSION['username'];
+  $sql = "Update Utilizador SET email='$email' WHERE nome='$nome'";
+
+     //Email já contem verificações feitas no type="email" por padrão
+    if(mysqli_query($link, $sql)){
+    echo '<script>alert("INFO: Email alterado com sucesso!")</script>';
+  } else {
+    echo '<script>alert("ERRO: Não foi possível atualizar o email.")</script>';
+  }
+}
+
+
+if(isset($_POST['submitNome'])){
+  $username = $_POST['nome'];
+
+  $nome=$_SESSION['username'];
+  $sql = "Update Utilizador SET nome='$username' WHERE nome='$nome'";
+
+     //Referência: https://stackoverflow.com/questions/12018245/regular-expression-to-validate-username
+    if (!preg_match_all('"^(?=.{5,30}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$"', $username)){
+      /*                   └─────┬────┘└───┬──┘└─────┬─────┘└─────┬─────┘ └───┬───┘
+       │         │         │            │           no _ or . at the end
+       │         │         │            │
+       │         │         │            allowed characters
+       │         │         │
+       │         │         no __ or _. or ._ or .. inside
+       │         │
+       │         no _ or . at the beginning
+       |       username tem que ter entre 5-30 characters long
+      */
+     echo '<script>alert("INFO: O nome tem que ter no mínimo 5 caracteres, máximo 30 (Pode conter: letras minúsculas, maisculas, números, _ - .)")</script>';
+  } else if(mysqli_query($link, $sql)){
+    echo '<script>alert("INFO: Nome alterado com sucesso!")</script>';
+    echo '<script>alert("INFO: Recomendamos que faça login novamente.")</script>';
+    //Atualizar username no navegador
+    $_SESSION['username']=$username;
+  } else {
+    echo '<script>alert("ERRO: Não foi possível atualizar o nome.")</script>';
+  }
+}
+
+if(isset($_POST['submitSenha'])){
+     $senha = $_POST['senha'];
+
+     $nome=$_SESSION['username'];
+     $sql = "Update Utilizador SET password='$senha' WHERE nome='$nome'";
+
+        //Verificar se senha tem:
+        //(?=.*\d) - qualquer numero
+        //(?=.*[A-Za-z]) - pelo menos 1 letra maiuscula e minuscula
+       if (!preg_match_all('"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$"', $senha)){
+        echo '<script>alert("INFO: A senha tem que ter no mínimo 6 e máximo 20 caracteres (com: letras minusculas, maisculas e números no mínimo)!")</script>';
+     } else if(mysqli_query($link, $sql)){
+       echo '<script>alert("INFO: Senha alterada com sucesso!")</script>';
+       echo '<script>alert("INFO: Recomendamos que faça login novamente.")</script>';
+     } else {
+       echo '<script>alert("ERRO: Não foi possível atualizar a senha.")</script>';
+     }
+}
+?>
 
 <!-- Footer -->
 <?php footer(); ?>
