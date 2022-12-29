@@ -175,6 +175,26 @@ if(isset($_POST['submitSenha'])){
        echo '<script>alert("ERRO: Não foi possível atualizar a senha.")</script>';
      }
 }
+
+  if(isset($_POST['submitTelemovel'])){
+  $telemovel = $_POST['telemovel'];
+
+  $nome=$_SESSION['username'];
+  $sql = "Update Utilizador SET telemovel='$telemovel' WHERE nome='$nome'";
+
+     //Verificar se senha tem:
+     //(?=.*\d) - qualquer numero
+     //(?=.*[A-Za-z]) - pelo menos 1 letra maiuscula e minuscula
+    if (!preg_match_all('"^\\d{9}$"', $telemovel)){
+     echo '<script>alert("INFO: O telemovel tem que ter 9 números.")</script>';
+  } else if(mysqli_query($link, $sql)){
+    echo '<script>alert("INFO: Nº Telemovel alterado com sucesso!")</script>';
+    echo '<script>alert("INFO: Recomendamos que faça login novamente.")</script>';
+    $_SESSION['telemovel']=$telemovel;
+  } else {
+    echo '<script>alert("ERRO: Não foi possível atualizar o nº telemovel.")</script>';
+  }
+
 ?>
 
 <!-- Footer -->

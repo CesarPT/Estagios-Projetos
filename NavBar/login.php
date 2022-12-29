@@ -46,6 +46,7 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
           $_SESSION['id'] = $row['id'];
           $_SESSION['password'] = $row['password'];
           $_SESSION['tipo_user'] = $row['tipo_user'];
+          $_SESSION['telemovel'] = $row['telemovel'];
           //echo "sd,jkgfsdk.jfasdçkj";
           header("Location: index.php");
           exit();

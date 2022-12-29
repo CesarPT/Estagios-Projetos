@@ -45,6 +45,31 @@ session_start();
                 <button type="submit" name="submitSenha" class="btn btn-primary">Alterar senha</button>
             </div>
         </form>
+        <form action="" method="POST">
+             <div class="form-group">
+                <label for="InputTelemovel">Alterar telemovel:</label>
+                <input type="text" class="form-control" name="telemovel" aria-describedby="senhaHelp" placeholder="Introduza telemovel" method="post">
+                <button type="submit" name="submitTelemovel" class="btn btn-primary">Alterar telemovel</button>
+            </div>
+        </form>
+        <p>Atual pessoa de contato:</p>
+        <p>-</p>
+        <p>Atual telemovel da pessoa de contato:</p>
+        <p>-</p>
+        <form action="" method="POST">
+             <div class="form-group">
+                <label for="InputNomeResponsavel">Alterar pessoa de contato:</label>
+                <input type="text" class="form-control" name="nome_responsavel" aria-describedby="senhaHelp" placeholder="Introduza nome da pessoa" method="post">
+                <button type="submit" name="submitNomeResponsavel" class="btn btn-secondary">Alterar pessoa de contato</button>
+            </div>
+        </form>
+        <form action="" method="POST">
+             <div class="form-group">
+                <label for="InputContatoResponsavel">Alterar telemovel de pessoa de contato:</label>
+                <input type="text" class="form-control" name="contato_responsavel" aria-describedby="senhaHelp" placeholder="Introduza telemovel da pessoa" method="post">
+                <button type="submit" name="submitContatoResponsavel" class="btn btn-secondary">Alterar telemovel da pessoa de contato</button>
+            </div>
+        </form>
 </body>
 
 </html>
