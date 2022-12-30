@@ -1,5 +1,32 @@
 <?php
  include_once("../ConnectionBD/connectbd.php");
+ session_start(); 
+
+ function validate($data){
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+if (isset($_POST['descricao']) && isset($_POST['empresa']) && isset($_POST['local'])) {
+
+  $descricao = validate($_POST['descricao']);
+  $empresa = validate($_POST['empresa']);
+  $local = validate($_POST['local']);
+
+
+  $sql = "INSERT INTO MyGuests (firstname, lastname, email)
+  VALUES ('$descricao', '$empresa', '$local')";
+
+  $result = mysqli_query($link, $sql);
+  
+  if (mysqli_query($conn, $sql)) {
+    echo "New record created successfully";
+  } else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
+}
 ?>
 
 
@@ -103,16 +130,20 @@
   <!-- Texto e outros //////////////////////////////////////////////////////////////////////////////////////////////-->
   <p> propostas</p>
 
-  <form action="/PedirProposta.php" method="POST">
-  <textarea name="descricao"></textarea><br>
-  <label for="v c">Empresa</label><br>
-  <label for="local">Local</label><br>
+  <form action="/dosos/NavBar/PedirProposta.php" method="POST">
+    <p>
+      <textarea name="descricao"></textarea>
+    </p><br>
+    <p>
+      <label for="empresa">Empresa</label><br>
+      <input type="text" name="empresa">
+    </p><br>
+    <p>
+      <label for="local">Local</label><br>
+      <input type="text" name="local">
+    </p><br>
   <input type="submit" value="Submit">
   </form> 
-
-<?php
-echo $_POST['descricao'];
-?>
 
 <table>
     

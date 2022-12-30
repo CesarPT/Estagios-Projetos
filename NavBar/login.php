@@ -15,10 +15,6 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
   $password = validate($_POST['password']);
 
 
-  //secho "----".$password;
-
-
-
 
   if (empty($name)) {
       header("Location: login.php?error=User Name is requierd");
@@ -142,7 +138,7 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
 </nav>
 
 
-  <!-- Texto e outros -->
+  <!-- Texto e outros ////////////////////////////////////////////////////////// -->
   <form action="login.php" method="post">
 <h1 class="text-center">Login</h1>
 <?php if (isset($_GET['error'])) { ?>
@@ -161,6 +157,8 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
         <button class="btn btn-primary" type="submit">Login</button>
     </div>
 </form>
+
+
 
 
 <!-- Footer -->
@@ -243,11 +241,5 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
   </div>
 </footer>
 
-
-<?php
-
-
-
-?>
 
 </body>
