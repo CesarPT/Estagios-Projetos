@@ -1,6 +1,8 @@
 <!--Conexão BD-->
 <?php include_once("../ConnectionBD/connectbd.php");
 session_start(); 
+require 'NavBar.php';
+require 'Footer.php';
 
 function validate($data){
   $data = trim($data);
@@ -29,14 +31,18 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
   $result = mysqli_query($link, $sql);
 
   if (mysqli_num_rows($result) == 1) {
-      //echo "ENTREI";
+      //Login correto
       $_SESSION['username']=$name;
+      $_SESSION['tipo_user']=$tipo_user;
+
       //header("Location:index.php");
       $row = mysqli_fetch_assoc($result);
       if ($row['nome'] == $name && $row['password'] == $password) {
           $_SESSION['nome'] = $row['nome'];
           $_SESSION['id'] = $row['id'];
           $_SESSION['password'] = $row['password'];
+          $_SESSION['tipo_user'] = $row['tipo_user'];
+          $_SESSION['telemovel'] = $row['telemovel'];
           //echo "sd,jkgfsdk.jfasdçkj";
           header("Location: index.php");
           exit();
@@ -75,68 +81,9 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
 </head>
 
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-sm bg-dark">
 
-  <!-- Logotipo -->
-  <a class="navbar-brand" href="index.php">
-    <img src="../Imagens/logo.jpg" alt="logo" style="width:40px;">
-  </a>
-  
-  <!-- Links -->
-  <ul class="navbar-nav d-flex flex-row">
-    <li class="nav-item p-2">
-      <a class="nav-link text-white" href="index.php">Home</a>
-    </li>
-    <li class="nav-item p-2">
-      <a class="nav-link disabled text-secondary" href="Responsavel.php">Responsável</a>
-    </li>
-    <li class="nav-item p-2">
-      <a class="nav-link disabled text-secondary" href="Docente.php">Docente</a>
-    </li>
-    <li class="nav-item p-2">
-      <a class="nav-link disabled text-secondary" href="Empresa.php">Empresa</a>
-    </li>
-    <li class="nav-item p-2">
-      <a class="nav-link disabled text-secondary" href="Aluno.php">Aluno</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="registrar.php">
-        <button class="btn btn-secondary">Registrar</button>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="login.php">
-        <button class="btn btn-primary">Login</button>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="areapessoal.php">
-        <button class="btn btn-light">Área pessoal</button>
-      </a>
-    </li>
-    <li class="nav-item">
-        <p class="p-3 mb-2 bg-dark text-white" class="text-light">
-          Utilizador: <?php
-            if (empty($_SESSION['username'])) {
-              //Se não tiver feito login
-              echo 'Faça login';
-            } else {
-              //Mostra o username
-              echo $_SESSION['username'];
-            }
-          ?>
-        </p>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <button id="logout" class="btn btn-danger">Logout</button>
-      </a>
-    </li>
-  </ul>
-
-</nav>
-
+<!-- NavBar para verificar qual o tipo_user e receber as permissões -->
+<?php navbar(); ?>
 
   <!-- Texto e outros ////////////////////////////////////////////////////////// -->
   <form action="login.php" method="post">
@@ -158,6 +105,7 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
     </div>
 </form>
 
+<<<<<<< HEAD
 
 
 
@@ -241,5 +189,9 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
   </div>
 </footer>
 
+=======
+<!-- Footer -->
+<?php footer(); ?>
+>>>>>>> 3460ef8f748dc050c61a9f033d5e7384556f3dcc
 
 </body>
