@@ -107,9 +107,60 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
     <div class="col-md-12 text-center">
         <button class="btn btn-primary" type="submit">Login</button>
     </div>
+    <div class="col-md-12 text-center">
+        <button type="button" onclick="recuperarSenha()">É empresa? - Recuperar senha</button>
+    </div>
 </form>
+
+<div id="info" class="d-flex justify-content-center"></div>
+
+<script>
+
+function recuperarSenha() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("info").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "../PHP/Empresa/RecuperarSenha.php", true);
+  xhttp.send();
+}
+
+</script>
+
+
+<!-- Estes POST vem do RecuperarSenha.php -->
+<?php
+if(isset($_POST['submitSenha'])){
+  
+  $email = $_POST['email'];
+  $password = $_POST['senha'];
+  $chave = $_POST['chave'];
+  $chaveAdmin = "DSOS";
+
+  $sql = "Update Utilizador SET password='$password' WHERE email='$email'";
+
+  //Verificação de email se é de uma empresa
+  $query = mysqli_query($link, "Select * FROM Utilizador WHERE email='$email' AND tipo_user='E'");
+
+  if(mysqli_num_rows($query) <= 0){
+    echo '<script>alert("Não foi encontrado esse email de empresa.")</script>';
+  } else if (!($chave == $chaveAdmin)) {
+    echo '<script>alert("INFO: Chave de segurança incorreta. Contate o Administrador.")</script>';
+  } else if (!preg_match_all('"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$"', $password)){
+    echo '<script>alert("INFO: A senha tem que ter no mínimo 6 e máximo 20 caracteres (com: letras minusculas, maisculas e números no mínimo)!")</script>';
+ } else if(mysqli_query($link, $sql)){
+    echo '<script>alert("INFO: Senha alterada com sucesso!")</script>';
+  } else {
+    echo '<script>alert("ERRO: Não foi possível atualizar a sua senha.")</script>';
+  }
+}
+?>
 
 <!-- Footer -->
 <?php footer(); ?>
 
 </body>
+</html>
