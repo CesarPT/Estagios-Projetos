@@ -27,7 +27,7 @@ function footer() {
   <footer class="p-3 mb-2 bg-dark text-center text-lg-start bg-light text-muted">
     <section class="p-3 mb-2 bg-dark d-flex justify-content-center justify-content-lg-between p-4 border-bottom" id="section">
       <div class="text-white me-5 d-none d-lg-block">
-        <h4>DSOS (Desenvolvimento de Software Orientado a Objetos) - Grupo 2 | 2022</h4>
+        <h4>DSOS (Desenvolvimento de Software Orientado a Serviços) - Grupo 2 | 2022/2023</h4>
       </div>
     </section>
 
@@ -40,7 +40,7 @@ function footer() {
               <i class="fas fa-gem me-3"></i>Membros do grupo:
             </h6>
             <p>César Guimarães - 1210522</p>
-            <p>Daniel Lima - 12105<p>
+            <p>Daniel Lima - 1210524<p>
             <p>Rodrigo Morais - 1210536<p>
           </div>
 
@@ -88,7 +88,7 @@ function footer() {
             <h6 class="text-uppercase fw-bold mb-4">Contatos</h6>
             <a href="mailto: 1210522@isep.ipp.pt">1210522@isep.ipp.pt</a>
             <br><br>
-            <a href="mailto: 12105@isep.ipp.pt">12105@isep.ipp.pt</a>
+            <a href="mailto: 12105@isep.ipp.pt">1210524@isep.ipp.pt</a>
             <br><br>
             <a href="mailto: 1210536@isep.ipp.pt">1210536@isep.ipp.pt</a>
           </div>

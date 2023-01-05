@@ -109,6 +109,7 @@ $erro1 = 'Faça login';
     xhttp.send();
   }
 
+
 </script>
 
 <!-- Estes POST vem do AlterarDados.php -->
@@ -183,8 +184,7 @@ if(isset($_POST['submitSenha'])){
   $sql = "Update Utilizador SET telemovel='$telemovel' WHERE nome='$nome'";
 
      //Verificar se senha tem:
-     //(?=.*\d) - qualquer numero
-     //(?=.*[A-Za-z]) - pelo menos 1 letra maiuscula e minuscula
+     //^\\d{9}$ - qualquer numero de 9 digitos
     if (!preg_match_all('"^\\d{9}$"', $telemovel)){
      echo '<script>alert("INFO: O telemovel tem que ter 9 números.")</script>';
   } else if(mysqli_query($link, $sql)){
