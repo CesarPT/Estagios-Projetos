@@ -1,6 +1,5 @@
 <?php
  include_once("../ConnectionBD/connectbd.php");
-<<<<<<< HEAD
  session_start(); 
 
  function validate($data){
@@ -15,23 +14,24 @@ if (isset($_POST['descricao']) && isset($_POST['empresa']) && isset($_POST['loca
   $descricao = validate($_POST['descricao']);
   $empresa = validate($_POST['empresa']);
   $local = validate($_POST['local']);
+  $id_user = validate($_POST['id_user']);
 
 
-  $sql = "INSERT INTO MyGuests (firstname, lastname, email)
-  VALUES ('$descricao', '$empresa', '$local')";
+  //Query para insert
+  $sql = "INSERT INTO Proposta (descricao, empresa, local,id_user)
+  VALUES ('$descricao', '$empresa', '$local','$id_user')";
 
   $result = mysqli_query($link, $sql);
   
-  if (mysqli_query($conn, $sql)) {
+  if (mysqli_query($link, $sql)) {
     echo "New record created successfully";
   } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "Error: " . $sql . "<br>" . mysqli_error($link);
   }
 }
-=======
+
  require 'NavBar.php';
  require 'Footer.php';
->>>>>>> 3460ef8f748dc050c61a9f033d5e7384556f3dcc
 ?>
 
 
@@ -72,21 +72,26 @@ if (isset($_POST['descricao']) && isset($_POST['empresa']) && isset($_POST['loca
 <!-- NavBar para verificar qual o tipo_user e receber as permissões -->
 <?php navbar(); ?>
 
-  <!-- Texto e outros //////////////////////////////////////////////////////////////////////////////////////////////-->
+  <!-- Texto e outros -->
   <p> propostas</p>
 
   <form action="/dosos/NavBar/PedirProposta.php" method="POST">
     <p>
+      <label> descricao </label>
       <textarea name="descricao"></textarea>
     </p><br>
     <p>
-      <label for="empresa">Empresa</label><br>
+      <label for="empresa">Empresa</label>
       <input type="text" name="empresa">
     </p><br>
     <p>
-      <label for="local">Local</label><br>
+      <label for="local">Local</label>
       <input type="text" name="local">
     </p><br>
+    <p>
+    <label for="estudante">Numero estudante</label>
+      <input type="text" name="id_user">
+    </p></br>
   <input type="submit" value="Submit">
   </form> 
 
