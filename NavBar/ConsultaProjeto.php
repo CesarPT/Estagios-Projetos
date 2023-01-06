@@ -2,9 +2,6 @@
  include_once("../ConnectionBD/connectbd.php");
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -16,7 +13,7 @@
 <html lang="pt">
 
 <head>
-  <title>Gestão de Projetos/Estágios</title>
+  <title>Gestão de Projetos</title>
   <link rel="icon" href="../Imagens/logo.jpg">
 
   <meta charset="utf-8">
@@ -102,18 +99,18 @@
   <p> propostas </p>
 
 <?php
-$sql = "SELECT Proposta.empresa,Proposta.local,Utilizador.nome,Proposta.estado
- from Proposta INNER JOIN Docente
- On Proposta.id_docente=Docente.id
- INNER JOIN Utilizador
- ON Utilizador.id=Docente.id_user";
+$sql = "SELECT Estagio.empresa,Estagio.local,Estagio.estado,AlunoDocente.id_aluno,AlunoDocente.id_docente
+ from Estagio INNER JOIN AlunoDocente
+ On Estagio.id_aluno=AlunoDocente.id_aluno";
 
 #get the result
 $final = mysqli_query($link, $sql);
 
 if (mysqli_num_rows($final) > 0) {
-    echo "<table><tr><th>Empresa</th>
+    echo 
+    "<table><tr><th>Empresa</th>
     <th>Local</th>
+    <th>Aluno</th>
     <th>Docente</th>
     <th>Estado</th>";
 
@@ -122,23 +119,22 @@ if (mysqli_num_rows($final) > 0) {
         //get id and name columns
         echo "<tr><td>" . $i["empresa"] .
             "</td><td>" . $i["local"] .
-            "</td><td>" . $i["nome"] .
+            "</td><td>" . $i["id_aluno"] .
+            "</td><td>" . $i["id_docente"] .
             "</td><td>" . $i["estado"] .
-       "</td></tr></table>";
+       "</td></tr>";
     }
+  echo "</table>";
 } else {
     echo "No results";
 }
 ?>
 
-<form action="http://localhost/dosos/Navbar/PedirProposta.php ">
+
+
+<form action="http://localhost/dosos/Navbar/ConsultaProjeto.php ">
     <input type="submit" value="Pedir" />
 </form>
-
-
-
-
-
 
 
 <!-- Footer -->
