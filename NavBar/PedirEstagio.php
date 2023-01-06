@@ -14,12 +14,12 @@ if (isset($_POST['descricao']) && isset($_POST['empresa']) && isset($_POST['loca
   $descricao = validate($_POST['descricao']);
   $empresa = validate($_POST['empresa']);
   $local = validate($_POST['local']);
-  $id_user = validate($_POST['id_user']);
+  $id_aluno = validate($_POST['id_user']);
 
 
   //Query para insert
-  $sql = "INSERT INTO Proposta (descricao, empresa, local,id_user)
-  VALUES ('$descricao', '$empresa', '$local','$id_user')";
+  $sql = "INSERT INTO Estagio (descricao, empresa, local, id_aluno)
+  VALUES ('$descricao', '$empresa', '$local','$id_aluno')";
 
   $result = mysqli_query($link, $sql);
   
@@ -33,6 +33,7 @@ if (isset($_POST['descricao']) && isset($_POST['empresa']) && isset($_POST['loca
  require 'NavBar.php';
  require 'Footer.php';
 ?>
+
 
 
 
@@ -75,7 +76,7 @@ if (isset($_POST['descricao']) && isset($_POST['empresa']) && isset($_POST['loca
   <!-- Texto e outros -->
   <p> propostas</p>
 
-  <form action="/dosos/NavBar/PedirProposta.php" method="POST">
+  <form action="/dosos/NavBar/PedirEstagio.php" method="POST">
     <p>
       <label> descricao </label>
       <textarea name="descricao"></textarea>
@@ -90,8 +91,9 @@ if (isset($_POST['descricao']) && isset($_POST['empresa']) && isset($_POST['loca
     </p><br>
     <p>
     <label for="estudante">Numero estudante</label>
-      <input type="text" name="id_user">
+      <input type="number" name="id_aluno">
     </p></br>
+    <p>
   <input type="submit" value="Submit">
   </form> 
 
