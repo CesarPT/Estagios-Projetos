@@ -1,13 +1,6 @@
 <!--Conexão BD-->
 <?php include_once("../ConnectionBD/connectbd.php");
 session_start();
-require 'NavBar.php';
-require 'Footer.php';
-
-if($_SESSION["tipo_user"]!='D'){
-  header('Location: ../Errors/RestrictPage.php');
-  exit();
-}
 
 //Atributos de erro no TryCatch
 $erro1 = 'Faça login';
@@ -37,15 +30,10 @@ $erro1 = 'Faça login';
 
 <body>
 
-<!-- NavBar para verificar qual o tipo_user e receber as permissões -->
-<?php navbar(); ?>
-
   <!-- Texto e outros -->
-  <h4 class="text-center">Bem vindo - Docente</h4>
+  <h2 class="text-center">Gestão de Projetos/Estágios</h2>
+  <h4 class="text-center">ERRO: Não tem acesso a esta página.</h4>
  
-<!-- Footer -->
-<?php footer(); ?>
-
 </body>
 
 </html>

@@ -4,6 +4,11 @@ session_start();
 require 'NavBar.php';
 require 'Footer.php';
 
+if($_SESSION["tipo_user"]!='A'){
+  header('Location: ../Errors/RestrictPage.php');
+  exit();
+}
+
 //Atributos de erro no TryCatch
 $erro1 = 'Faça login';
 ?>
