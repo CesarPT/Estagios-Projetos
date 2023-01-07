@@ -128,7 +128,7 @@ $erro1 = 'Faça login';
         $result = mysqli_query($link, $sqlInsert);
                         
         if (!empty($result)){
-            echo '<p>alert("Os dados foram inseridos na base de dados com sucesso!")</p>';
+            echo 'Os dados foram inseridos na base de dados com sucesso!';
         } else {
              echo "Erro: Não foi possível importar para a base de dados.";
         }
