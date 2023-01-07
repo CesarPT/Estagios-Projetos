@@ -3,7 +3,7 @@
 session_start();
 
 
-// initializing variables
+// Inicializar variáveis
 $email = "";
 $nome = "";
 $telemovel = "";
@@ -11,7 +11,7 @@ $errors = array();
 
 // connect to the database
 //$link = mysqli_connect('ctesp.dei.isep.ipp.pt', '2022_DSOS_G2', 'Er5ohRSHiLqLFf#', '2022_DSOS_G2');
-// REGISTER USER
+// Registar utilizador
 if (isset($_POST['reg_user'])) {
   // receive all input values from the form
   $nome = mysqli_real_escape_string($link, $_POST['nome']);
@@ -21,29 +21,32 @@ if (isset($_POST['reg_user'])) {
   $password_1 = mysqli_real_escape_string($link, $_POST['password_1']);
   $password_2 = mysqli_real_escape_string($link, $_POST['password_2']);
 
-  // form validation: ensure that the form is correctly filled ...
+  // validaçao do formulário: assegura que o formulário está correctamente preenchido
   // by adding (array_push()) corresponding error unto $errors array
-  if (empty($nome)) { array_push($errors, "Nome is required"); }
-  if (empty($telemovel)) { array_push($errors, "Telemovel is required"); }
-  if (empty($email)) { array_push($errors, "Email is required"); }
-  if (empty($tipo_user)) { array_push($errors, "Tipo de Utilizador is required"); }
-  if (empty($password_1)) { array_push($errors, "Password is required"); }
+  if (empty($nome)) { array_push($errors, "Nome / username requerido"); }
+  if (empty($telemovel)) { array_push($errors, "Telemovel requerido"); }
+  if (empty($email)) { array_push($errors, "Email requerido"); }
+  if (empty($tipo_user)) { array_push($errors, "Tipo de Utilizador requerido"); }
+  if (empty($password_1)) { array_push($errors, "Password requerida"); }
   if ($password_1 != $password_2) {
-	array_push($errors, "The two passwords do not match");
+	array_push($errors, "As passwords não são iguais");
   }
 
   // first check the database to make sure 
   // a user does not already exist with the same username and/or email
-  $user_check_query = "SELECT * FROM Utilizador WHERE email='$email' LIMIT 1";
+  $user_check_query = "SELECT * FROM Utilizador WHERE nome='$nome' or email='$email' LIMIT 1";
   $result = mysqli_query($link, $user_check_query);
   $user = mysqli_fetch_assoc($result);
-  
+
   if ($user) { // if user exists
+    if ($user['nome'] === $nome) {
+      array_push($errors, "Username já existe");
+    }
+
     if ($user['email'] === $email) {
-      array_push($errors, "email already exists");
+      array_push($errors, "email já existe");
     }
   }
-
   // Finally, register user if there are no errors in the form
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
@@ -51,8 +54,8 @@ if (isset($_POST['reg_user'])) {
   	$query = "INSERT INTO Utilizador (nome,password, email, telemovel, tipo_user)
   			  VALUES ('$nome', '$password', '$email', '$telemovel', '$tipo_user')";
   	mysqli_query($link, $query);
-  	$_SESSION['email'] = $email;
-  	$_SESSION['success'] = "You are now logged in";
+  	$_SESSION['nome'] = $nome;
+  	$_SESSION['success'] = "Entrou com sucesso";
   	header('location: index.php');
   }
 }
