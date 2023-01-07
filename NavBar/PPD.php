@@ -1,10 +1,18 @@
 <?php
  include_once("../ConnectionBD/connectbd.php");
+ session_start();
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
+
+<script type = "text/javascript">  
+function myfunction() {   
+alert("how are you");  
+         }  
+</script>  
 
 <head>
 <title>Aluno</title>
@@ -13,7 +21,7 @@
 <html lang="pt">
 
 <head>
-  <title>Gestão de Estágios</title>
+  <title>Gestão de Projetos</title>
   <link rel="icon" href="../Imagens/logo.jpg">
 
   <meta charset="utf-8">
@@ -32,6 +40,7 @@
 </head>
 
 <body>
+  
 <!-- Navbar -->
 <nav class="navbar navbar-expand-sm bg-dark">
 
@@ -96,45 +105,57 @@
 
 
   <!-- Texto e outros -->
-  <p> propostas </p>
+  <h1>Propostas de projeto</h1>
 
 <?php
-$sql = "SELECT Estagio.empresa,Estagio.local,Estagio.estado,AlunoDocente.id_aluno,AlunoDocente.id_docente
- from Estagio INNER JOIN AlunoDocente
- On Estagio.id_aluno=AlunoDocente.id_aluno";
+$id_docente=$_SESSION['id'];
 
-#get the result
-$final = mysqli_query($link, $sql);
 
-if (mysqli_num_rows($final) > 0) {
-    echo 
-    "<table><tr><th>Empresa</th>
-    <th>Local</th>
-    <th>Aluno</th>
-    <th>Docente</th>
-    <th>Estado</th>";
+if(isset($GET['id_projeto'])){
+  $sql2="Update Projeto 
+  set id_docente= $id_docente".
+  "where id_projeto".$GET['id_projeto'];
+
+  if ($conn->query($sql2) === TRUE) {
+    echo "New record created successfully";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+}
+
+  $sql = "SELECT Projeto.id_projeto,Projeto.descricao,Projeto.estado,Utilizador.nome
+    from Projeto 
+    Left join Utilizador on
+    Utilizador.id=Projeto.id_aluno";
+
+  #get the result
+  $final = mysqli_query($link, $sql);
+
+
+  if (mysqli_num_rows($final) > 0) {
+    echo
+      "<table><tr><th>Descrição</th>
+        <th>Estado</th>
+        <th>Aluno</th>
+        <th>Orientar</th>";
 
     //get the output of each row
     while ($i = mysqli_fetch_assoc($final)) {
-        //get id and name columns
-        echo "<tr><td>" . $i["empresa"] .
-            "</td><td>" . $i["local"] .
-            "</td><td>" . $i["id_aluno"] .
-            "</td><td>" . $i["id_docente"] .
-            "</td><td>" . $i["estado"] .
-       "</td></tr>";
+      //get id and name columns
+      echo "<tr><td>" . $i["descricao"] .
+        "</td><td>" . $i["estado"] .
+        "</td><td>" . $i["nome"] .
+        "</td><td>";
+        echo "<a href='ConsultaProjetoDoce.php?IdProj=".$i['id_projeto']."'>Orientar</a>
+        </td></tr>";
     }
-  echo "</table>";
-} else {
+    echo "</table>";
+  } else {
     echo "No results";
-}
+  }
+
+
 ?>
-
-
-
-<form action="http://localhost/dosos/Navbar/ConsultaEstagio.php ">
-    <input type="submit" value="Pedir" />
-</form>
 
 
 <!-- Footer -->
@@ -217,4 +238,5 @@ if (mysqli_num_rows($final) > 0) {
   </div>
 </footer>
 </body>
+
 </html>

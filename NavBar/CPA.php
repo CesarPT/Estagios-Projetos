@@ -1,5 +1,14 @@
 <?php
  include_once("../ConnectionBD/connectbd.php");
+ session_start();
+
+ require 'NavBar.php';
+require 'Footer.php';
+
+if ($_SESSION["tipo_user"] != 'A') {
+  header('Location: ../Errors/RestrictPage.php');
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +22,7 @@
 <html lang="pt">
 
 <head>
-  <title>Gestão de Projetos</title>
+  <title>Gestão de Estágios</title>
   <link rel="icon" href="../Imagens/logo.jpg">
 
   <meta charset="utf-8">
@@ -96,45 +105,61 @@
 
 
   <!-- Texto e outros -->
-  <p> propostas </p>
+  <h1> Projetos </h1>
 
 <?php
-$sql = "SELECT Estagio.empresa,Estagio.local,Estagio.estado,AlunoDocente.id_aluno,AlunoDocente.id_docente
- from Estagio INNER JOIN AlunoDocente
- On Estagio.id_aluno=AlunoDocente.id_aluno";
+
+$id_aluno=$_SESSION['id'];
+
+if(isset($_GET['IdProge'])){
+  $sql2="Update Projeto  
+  set id_aluno= $id_aluno".
+  " where id_projeto=".$_GET['IdProge'] //. " and id_aluno=NULL";
+;
+
+  if ($link->query($sql2) === TRUE) {
+    echo "Foi associado ";
+  } else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+  }
+}
+
+
+
+$sql = "SELECT Projeto.id_projeto,Projeto.descricao,Projeto.estado,Utilizador.nome,Projeto.id_professor
+from Projeto Left JOIN Utilizador
+On Projeto.id_aluno=Utilizador.id";
 
 #get the result
 $final = mysqli_query($link, $sql);
 
 if (mysqli_num_rows($final) > 0) {
-    echo 
-    "<table><tr><th>Empresa</th>
-    <th>Local</th>
-    <th>Aluno</th>
-    <th>Docente</th>
-    <th>Estado</th>";
+  echo 
+  "<table><tr><th>Descrição</th>
+  <th>Estado</th>
+  <th>Aluno</th>
+  <th>Docente</th>";
 
-    //get the output of each row
-    while ($i = mysqli_fetch_assoc($final)) {
-        //get id and name columns
-        echo "<tr><td>" . $i["empresa"] .
-            "</td><td>" . $i["local"] .
-            "</td><td>" . $i["id_aluno"] .
-            "</td><td>" . $i["id_docente"] .
-            "</td><td>" . $i["estado"] .
-       "</td></tr>";
-    }
-  echo "</table>";
+  //get the output of each row
+  while ($i = mysqli_fetch_assoc($final)) {
+      //get id and name columns
+      echo "<tr><td>" . $i["descricao"] .
+          "</td><td>" . $i["estado"] .
+          "</td><td>" . $i["nome"] .
+          "</td><td>" . $i["id_professor"] .
+          "</td><td>";
+          echo "<a href='CPA.php?IdProge=".$i['id_projeto']."'>Escolher</a>
+          </td></tr>";
+     "</td></tr>";
+  }
+echo "</table>";
 } else {
-    echo "No results";
+  echo "No results";
 }
 ?>
 
 
 
-<form action="http://localhost/dosos/Navbar/ConsultaProjeto.php ">
-    <input type="submit" value="Pedir" />
-</form>
 
 
 <!-- Footer -->
