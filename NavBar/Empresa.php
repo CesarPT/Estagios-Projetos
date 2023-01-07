@@ -199,7 +199,7 @@ if(isset($_POST['submitSenha'])){
   } else {
     echo '<script>alert("ERRO: Não foi possível atualizar o nº telemovel.")</script>';
   }
-
+  }
 ?>
 
 <!-- Footer -->

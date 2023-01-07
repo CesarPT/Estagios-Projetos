@@ -40,9 +40,103 @@ $erro1 = 'Faça login';
 <!-- NavBar para verificar qual o tipo_user e receber as permissões -->
 <?php navbar(); ?>
 
-  <!-- Texto e outros -->
-  <h4 class="text-center">Bem vindo - Responsável</h4>
- 
+   <!-- Texto e outros -->
+   <h4 class="text-center">Bem vindo - Responsável</h4>
+
+<div class="container-fluid">
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Número
+              </th>
+              <th>
+                Descrição
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                1
+              </td>
+              <td>
+              <button type="button" onclick="importarCSV()">Importar alunos (Formato: CSV)</button>
+              </td>
+            </tr>
+            <tr class="table-active">
+              <td>
+                2
+              </td>
+              <td>
+                ------
+              </td>
+            </tr>
+            <tr class="table-success">
+              <td>
+                3
+              </td>
+              <td>
+              ------
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="info" class="col-md-12">
+        <br><br>
+        <h5>
+          Informações:
+        </h5>
+        <p>
+          Clique no item em cima que deseja visualizar. <br><strong>Irá aparecer em baixo todas as informações</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AJAX + PHP -->
+<script>
+  function importarCSV() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("info").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", "../PHP/Responsavel/ImportarCSV.php", true);
+    xhttp.send();
+  }
+</script>
+
+
+<?php
+  if (isset($_POST["import"])){
+    
+      $fileName = $_FILES["file"]["tmp_name"];
+
+      if($_FILES["file"]["size"] > 0){
+        $file = fopen($fileName, "r");
+      while(($column = fgetcsv($file, 10000, ",")) !== FALSE){
+        $sqlInsert = "Insert into Utilizador (nome, password, email, telemovel, tipo_user) values 
+        ('".$column[0]." ', '".$column[1]." ', '".$column[2]." ', ".$column[3].", '".$column[4]." ')";
+        $result = mysqli_query($link, $sqlInsert);
+                        
+        if (!empty($result)){
+            echo '<p>alert("Os dados foram inseridos na base de dados com sucesso!")</p>';
+        } else {
+             echo "Erro: Não foi possível importar para a base de dados.";
+        }
+      }
+    }
+  }
+?>
+
 <!-- Footer -->
 <?php footer(); ?>
 
