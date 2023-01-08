@@ -16,18 +16,18 @@ function validate($data){
 }
 
 
-$id_aluno=$_SESSION['id'];
+$id_docente=$_SESSION['id'];
 if (isset($_POST['descricao'])) {
 
   $nomeemp =  $_POST['empresa'];
  $descricao = validate($_POST['descricao']);
  $local= validate($_POST['local']);
- $id_user = $id_aluno;
+ $id_user = $id_docente;
 
 
  //Query para insert
- $sql = "INSERT INTO Estagio (descricao,local,id_aluno,id_empresa)
- VALUES ('$descricao','$local','$id_aluno','$nomeemp')";
+ $sql = "INSERT INTO Estagio (descricao,local,id_docente,id_empresa)
+ VALUES ('$descricao','$local','$id_user','$nomeemp')";
 
  $result = mysqli_query($link, $sql);
  

@@ -43,6 +43,11 @@ $erro1 = 'Faça login';
   <!-- Texto e outros -->
   <h4 class="text-center">Bem vindo - Docente</h4>
  
+  <a href="PPD.php">Pedido de Projeto</a>
+  <a href="PED.php">Pedido de Estagio</a>
+  <a href="CPD.php">Constulta de Projeto</a>
+  <a href="CED.php">Constulta de Estagio</a>
+
 <!-- Footer -->
 <?php footer(); ?>
 

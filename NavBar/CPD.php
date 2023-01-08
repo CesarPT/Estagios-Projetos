@@ -114,7 +114,7 @@ $id_professor=$_SESSION['id'];
 if(isset($_GET['IdProge'])){
   $sql2="Update Projeto  
   set id_professor= $id_professor".
-  " where id_projeto=".$_GET['IdProge'] //. " and id_aluno=NULL";
+  " where id_projeto=".$_GET['IdProge'] ." And id_professor=NULL" //. " and id_aluno=NULL";
 ;
 
   if ($link->query($sql2) === TRUE) {
@@ -149,7 +149,7 @@ if (mysqli_num_rows($final) > 0) {
           "</td><td>" . $i["nome"] .
           "</td><td>" . $i["id_professor"] .
           "</td><td>";
-          echo "<a href='CPA.php?IdProge=".$i['id_projeto']."'>Escolher</a>
+          echo "<a href='CPD.php?IdProge=".$i['id_projeto']."'>Escolher</a>
           </td></tr>";
      "</td></tr>";
   }
