@@ -30,24 +30,24 @@ require 'Footer.php';?>
   <form method="post" action="registrar.php">
   	<?php include('errors.php'); ?>
   	
-  	  <label>Nome</label>
-  	  <input type="text" name="nome" value="<?php echo $nome; ?>">
+  	  <label>Nome de Utilizador / Username</label>
+  	  <input type="text" name="nome" value="<?php echo $nome; ?>"> <br>
   	
   	
   	  <label>Email</label>
-  	  <input type="email" name="email" value="<?php echo $email; ?>">
+  	  <input type="email" name="email" value="<?php echo $email; ?>"><br>
   	
       
   	  <label>Telemovel</label>
-  	  <input type="text" name="telemovel" value="<?php echo $telemovel; ?>">
+  	  <input type="text" name="telemovel" value="<?php echo $telemovel; ?>"><br>
   
   
   	  <label>Password</label>
-  	  <input type="password" name="password_1">
+  	  <input type="password" name="password_1"><br>
   
   	
   	  <label>Confirm password</label>
-  	  <input type="password" name="password_2">
+  	  <input type="password" name="password_2"><br>
 
         <label>Tipo de Utilizador</label>
         <select name="tipo_user">
@@ -56,7 +56,7 @@ require 'Footer.php';?>
                     <option value="E">Empresa</option>
                     <option value="D">Docente</option>
                     <option value="R">Responsavel</option>
-                </select>
+                </select> <br>
  
   	
   	  <button type="submit" class="btn" name="reg_user">Registar</button>

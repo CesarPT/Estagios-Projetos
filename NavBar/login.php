@@ -26,6 +26,12 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
       //exit();
   }
 
+  $errors = array();
+  $password_1 = mysqli_real_escape_string($link, $_POST['password']);
+  if (count($errors) == 0) {
+  	$password = md5($password_1);
+  }
+
   $sql = "Select * FROM Utilizador Where nome='$name' and password='$password'";
 
   $result = mysqli_query($link, $sql);
