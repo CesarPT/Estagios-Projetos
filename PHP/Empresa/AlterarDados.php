@@ -52,10 +52,6 @@ session_start();
                 <button type="submit" name="submitTelemovel" class="btn btn-primary">Alterar telemovel</button>
             </div>
         </form>
-        <p>Atual pessoa de contato:</p>
-        <p>-</p>
-        <p>Atual telemovel da pessoa de contato:</p>
-        <p>-</p>
         <form action="" method="POST">
              <div class="form-group">
                 <label for="InputNomeResponsavel">Alterar pessoa de contato:</label>
