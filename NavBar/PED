@@ -4,10 +4,10 @@
 include_once("../ConnectionBD/connectbd.php");
 session_start(); 
 
-//if ($_SESSION["tipo_user"] != 'A') {
- //header('Location: ../Errors/RestrictPage.php');
-// exit();
-//}
+if ($_SESSION["tipo_user"] != 'A') {
+ header('Location: ../Errors/RestrictPage.php');
+ exit();
+}
 function validate($data){
  $data = trim($data);
  $data = stripslashes($data);

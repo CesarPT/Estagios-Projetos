@@ -2,10 +2,15 @@
  include_once("../ConnectionBD/connectbd.php");
  session_start(); 
 
- //if ($_SESSION["tipo_user"] != 'D') {
- // header('Location: ../Errors/RestrictPage.php');
- // exit();
-//}
+if ($_SESSION["tipo_user"] != 'D') {
+  header('Location: ../Errors/RestrictPage.php');
+  exit();
+}
+
+
+
+
+
  function validate($data){
   $data = trim($data);
   $data = stripslashes($data);
@@ -17,6 +22,32 @@
 $id_aluno=$_SESSION['id'];
 if (isset($_POST['descricao'])) {
 
+  $targetfolder = "testupload/";
+  $target_file = $target_file . basename($_FILES['filepdf']['name']);
+  $uploadOk = 1;
+  $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+  if (isset($_POST["filepdf"])) {
+    if (file_exists($target_file)) {
+      echo "Sorry, file already exists.";
+    } else { 
+      {
+        if($imageFileType == "pdf"){
+        $uploadOk = 0;
+
+        $check = getimagesize($_FILES["filepdf"]["tmp_name"]);
+        if ($check !== false) {
+          $uploadOk = 1;
+        } else {
+          echo "File is not an image.";
+          $uploadOk = 0;
+        }
+      }
+    }
+  }
+}
+}
+ 
   $descricao = validate($_POST['descricao']);
 
   $id_user = $id_aluno;
@@ -33,7 +64,6 @@ if (isset($_POST['descricao'])) {
   } else {
     //echo "Error: " . $sql . "<br>" . mysqli_error($link);
   }
-}
 
  require 'NavBar.php';
  require 'Footer.php';
@@ -83,6 +113,10 @@ if (isset($_POST['descricao'])) {
       <label> descricao </label>
       <textarea name="descricao"></textarea>
     </p><br>
+    <p>
+    <label> ficheiro PDF</label>
+    <input type="file" name="filepdf" size="50"> 
+  </p><br>
     <!--
     <p>
    <label for="estudante">Numero estudante</label>
