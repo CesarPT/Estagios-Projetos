@@ -60,15 +60,12 @@ session_start();
              <div class="form-group">
                 <label for="InputNomeResponsavel">Alterar pessoa de contato:</label>
                 <input type="text" class="form-control" name="nome_responsavel" aria-describedby="senhaHelp" placeholder="Introduza nome da pessoa" method="post">
-                <button type="submit" name="submitNomeResponsavel" class="btn btn-secondary">Alterar pessoa de contato</button>
             </div>
-        </form>
-        <form action="" method="POST">
              <div class="form-group">
                 <label for="InputContatoResponsavel">Alterar telemovel de pessoa de contato:</label>
                 <input type="text" class="form-control" name="contato_responsavel" aria-describedby="senhaHelp" placeholder="Introduza telemovel da pessoa" method="post">
-                <button type="submit" name="submitContatoResponsavel" class="btn btn-secondary">Alterar telemovel da pessoa de contato</button>
             </div>
+            <button type="submit" name="submitResponsavel" class="btn btn-secondary">Alterar dados do responsável da empresa</button>
         </form>
 </body>
 

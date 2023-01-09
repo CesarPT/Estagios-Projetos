@@ -188,7 +188,7 @@ if(isset($_POST['submitSenha'])){
   $nome=$_SESSION['username'];
   $sql = "Update Utilizador SET telemovel='$telemovel' WHERE nome='$nome'";
 
-     //Verificar se senha tem:
+     //Verificar se telemovel tem:
      //^\\d{9}$ - qualquer numero de 9 digitos
     if (!preg_match_all('"^\\d{9}$"', $telemovel)){
      echo '<script>alert("INFO: O telemovel tem que ter 9 números.")</script>';
@@ -199,6 +199,36 @@ if(isset($_POST['submitSenha'])){
   } else {
     echo '<script>alert("ERRO: Não foi possível atualizar o nº telemovel.")</script>';
   }
+  }
+
+  if(isset($_POST['submitResponsavel'])){
+    $nomeResponsavel = $_POST['nome_responsavel'];
+    $contactoResponsavel = $_POST['contato_responsavel'];
+
+    $nome=$_SESSION['username'];
+    $id=$_SESSION['id'];
+
+    
+
+    $sql = "INSERT INTO Empresa (id_user, nome_responsavel, contacto_responsavel) 
+    VALUES ($id, '$nomeResponsavel',$contactoResponsavel)
+    ON DUPLICATE KEY UPDATE
+    id_user=$id, nome_responsavel='$nomeResponsavel', contacto_responsavel=$contactoResponsavel";
+       //Verificar se nomeResponsavel tem:
+       ///^([a-zA-Z' ]+)$/ - nome próprio + apelido
+      if (!preg_match_all("/^([a-zA-Z' ]+)$/", $nomeResponsavel)){
+       echo '<script>alert("INFO: O nome do responsável tem que ter nome próprio + apelido (Ex: António Joaquim).")</script>';
+       //Verificar se contacto tem:
+       //^\\d{9}$ - qualquer numero de 9 digitos
+      } else if (!preg_match_all('"^\\d{9}$"', $contactoResponsavel)){
+      echo '<script>alert("INFO: O telemovel tem que ter 9 números.")</script>';
+      } else if(mysqli_query($link, $sql)){
+      echo '<script>alert("INFO: Dados alterado com sucesso!")</script>';
+      echo '<script>alert("INFO: Recomendamos que faça login novamente.")</script>';
+      $_SESSION['telemovel']=$telemovel;
+    } else {
+      echo '<script>alert("ERRO: Não foi possível atualizar os dados.")</script>';
+    }
   }
 ?>
 
