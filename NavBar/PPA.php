@@ -2,10 +2,10 @@
  include_once("../ConnectionBD/connectbd.php");
  session_start(); 
 
- //if ($_SESSION["tipo_user"] != 'D') {
- // header('Location: ../Errors/RestrictPage.php');
- // exit();
-//}
+if ($_SESSION["tipo_user"] != 'D') {
+  header('Location: ../Errors/RestrictPage.php');
+  exit();
+}
 
 
 
