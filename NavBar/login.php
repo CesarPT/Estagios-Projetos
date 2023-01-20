@@ -142,7 +142,7 @@ if(isset($_POST['submitSenha'])){
   $chave = $_POST['chave'];
   $chaveAdmin = "DSOS";
 
-  $sql = "Update Utilizador SET password='$password' WHERE email='$email'";
+  $sql = "Update Utilizador SET password='" . md5($_POST['senha']) . "' WHERE email='$email'";
 
   //Verificação de email se é de uma empresa
   $query = mysqli_query($link, "Select * FROM Utilizador WHERE email='$email' AND tipo_user='E'");

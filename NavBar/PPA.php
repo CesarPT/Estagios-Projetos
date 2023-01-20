@@ -7,17 +7,12 @@ if ($_SESSION["tipo_user"] != 'D') {
   exit();
 }
 
-
-
-
-
  function validate($data){
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
   return $data;
 }
-
 
 $id_aluno=$_SESSION['id'];
 if (isset($_POST['descricao'])) {
