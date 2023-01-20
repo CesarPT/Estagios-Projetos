@@ -1,0 +1,75 @@
+{
+    "Status": "OK",
+    "Parking": [
+        {
+            "GroupId": "EG2",
+            "ParkingSpot": "P01",
+            "Price": 14.99,
+            "Indoor": true,
+            "Occupied": false
+        },
+        {
+            "GroupId": "EG2",
+            "ParkingSpot": "P02",
+            "Price": 14.99,
+            "Indoor": true,
+            "Occupied": false
+        },
+        {
+            "GroupId": "EG2",
+            "ParkingSpot": "P03",
+            "Price": 14.99,
+            "Indoor": true,
+            "Occupied": false
+        },
+        {
+            "GroupId": "EG2",
+            "ParkingSpot": "P04",
+            "Price": 14.99,
+            "Indoor": true,
+            "Occupied": false
+        },
+        {
+            "GroupId": "EG2",
+            "ParkingSpot": "P05",
+            "Price": 14.99,
+            "Indoor": true,
+            "Occupied": false
+        },
+        {
+            "GroupId": "EG2",
+            "ParkingSpot": "P06",
+            "Price": 9.99,
+            "Indoor": false,
+            "Occupied": false
+        },
+        {
+            "GroupId": "EG2",
+            "ParkingSpot": "P07",
+            "Price": 9.99,
+            "Indoor": false,
+            "Occupied": false
+        },
+        {
+            "GroupId": "EG2",
+            "ParkingSpot": "P08",
+            "Price": 9.99,
+            "Indoor": false,
+            "Occupied": false
+        },
+        {
+            "GroupId": "EG2",
+            "ParkingSpot": "P09",
+            "Price": 9.99,
+            "Indoor": false,
+            "Occupied": false
+        },
+        {
+            "GroupId": "EG2",
+            "ParkingSpot": "P10",
+            "Price": 9.99,
+            "Indoor": false,
+            "Occupied": false
+        }
+    ]
+}

@@ -125,7 +125,6 @@ if(isset($_GET['IdEstag'])){
 }
 
 
-
 $sql = "SELECT Estagio.id_estagio,Estagio.descricao,Estagio.local,Utilizador.nome,Estagio.id_docente,Estagio.estado
 from Estagio Left JOIN Utilizador
 On Estagio.id_aluno=Utilizador.id";
