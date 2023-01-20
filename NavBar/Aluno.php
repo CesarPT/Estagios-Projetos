@@ -44,11 +44,13 @@ $erro1 = 'Faça login';
   <h4 class="text-center">Bem vindo! - Aluno</h4>
 
 <a href="PPA.php">Pedido de Projeto</a>
+<br>
 <a href="PEA.php">Pedido de Estagio</a>
-<a href="CPA.php">Constulta de Projeto</a>
-<a href="CEA.php">Constulta de Estagio</a>
-
-
+<br>
+<a href="CPA.php">Consulta de Projeto</a>
+<br>
+<a href="CEA.php">Consulta de Estagio</a>
+<br>
 
 <!-- Footer -->
 <?php footer(); ?>
