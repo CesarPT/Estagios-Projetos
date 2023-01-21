@@ -32,11 +32,10 @@ $erro1 = 'Faça login';
        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
        crossorigin="anonymous">
   </script>
-  <script type="text/javascript" src="../JQUERY/script.js"></script>
+  <script type="text/javascript" src="../API/api-alunos.js"></script>
 </head>
-
 <body>
- 
+
 <!-- NavBar para verificar qual o tipo_user e receber as permissões -->
 <?php navbar(); ?>
 

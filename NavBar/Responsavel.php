@@ -72,7 +72,7 @@ $erro1 = 'Faça login';
                 2
               </td>
               <td>
-                ------
+              <button type="button" onclick="jsonMySQL()">Importar alunos da API (Formato: JSON)</button>
               </td>
             </tr>
             <tr class="table-success">
@@ -114,6 +114,20 @@ $erro1 = 'Faça login';
   }
 </script>
 
+<!-- AJAX + PHP -->
+<script>
+  function jsonMySQL() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("info").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", "../PHP/API/getAlunos.php", true);
+    xhttp.send();
+  }
+</script>
 
 <?php
   if (isset($_POST["import"])){
